@@ -1,7 +1,49 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import { useState, useEffect } from "react";
+
+const roles = ["Diseñador Web", "Automatizador", "Analista de Datos"];
 
 export function HeroSection() {
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 530);
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  useEffect(() => {
+    const currentRole = roles[currentRoleIndex];
+    const typeSpeed = isDeleting ? 50 : 100;
+    const pauseTime = isDeleting ? 200 : 2000;
+
+    if (!isDeleting && displayText === currentRole) {
+      const timeout = setTimeout(() => setIsDeleting(true), pauseTime);
+      return () => clearTimeout(timeout);
+    }
+
+    if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setDisplayText((prev) =>
+        isDeleting
+          ? prev.slice(0, -1)
+          : currentRole.slice(0, prev.length + 1)
+      );
+    }, typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentRoleIndex]);
+
   return (
     <section id="inicio" className="min-h-screen flex flex-col items-center justify-center px-6 lg:px-12 pt-20">
       <div className="max-w-7xl mx-auto w-full text-center">
@@ -18,9 +60,14 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6"
+          className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 min-h-[1.2em]"
         >
-          <span className="gradient-text">Diseñador Web</span>
+          <span className="gradient-text">{displayText}</span>
+          <span 
+            className={`inline-block w-[3px] md:w-[4px] h-[0.9em] bg-primary ml-1 align-middle transition-opacity duration-100 ${
+              showCursor ? "opacity-100" : "opacity-0"
+            }`}
+          />
         </motion.h1>
 
         <motion.div
