@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const roles = ["Diseñador Web", "Automatizador", "Analista de Datos"];
+const roles = ["Diseñador Web", "Automatizador", "Analista de Datos", "Programador"];
 
 export function HeroSection() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
