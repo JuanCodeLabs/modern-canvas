@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Send, X, MessageSquare, Phone, MapPin } from "lucide-react";
 
@@ -13,6 +13,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     email: "",
     message: "",
   });
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,15 +42,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-50 flex items-center justify-center p-6"
-          style={{ backdropFilter: "blur(20px)", background: "hsl(var(--background) / 0.8)" }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-6 overflow-auto"
+          style={{ 
+            backdropFilter: "blur(10px)", 
+            backgroundColor: "hsl(var(--background) / 0.95)",
+            WebkitOverflowScrolling: 'touch'
+          }}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="glass-card rounded-3xl overflow-hidden max-w-lg w-full glow"
+            className="glass-card rounded-3xl overflow-hidden max-w-lg w-full max-h-[90vh] overflow-y-auto glow"
           >
             <div className="p-8">
               <div className="flex items-center justify-between mb-6">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, MoreHorizontal, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -18,6 +18,29 @@ const menuItems = [
 
 export function Navbar({ onContactClick }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Handle ESC key press to close menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Add event listener when menu is open
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen]);
 
   const scrollToSection = (href: string) => {
     setIsMenuOpen(false);
@@ -103,10 +126,14 @@ export function Navbar({ onContactClick }: NavbarProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 glass-card"
-            style={{ backdropFilter: "blur(30px)" }}
+            onClick={() => setIsMenuOpen(false)}
+            className="fixed inset-0 z-50 bg-background/95"
+            style={{ backdropFilter: "blur(10px)" }}
           >
-            <div className="h-full flex">
+            <div 
+              className="h-full flex"
+              onClick={(e) => e.stopPropagation()}
+            >
               {/* Left side - Menu items */}
               <div className="flex-1 flex flex-col justify-center px-12 lg:px-24">
                 <nav className="space-y-2">
