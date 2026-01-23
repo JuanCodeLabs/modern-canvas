@@ -10,7 +10,7 @@ export function Footer() {
 
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/JuanCodeLabs"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full glass-card hover-glow transition-all duration-300"
@@ -18,7 +18,7 @@ export function Footer() {
             <Github className="w-5 h-5" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/juan-diaz-5804aa203/"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full glass-card hover-glow transition-all duration-300"

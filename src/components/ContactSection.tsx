@@ -190,7 +190,7 @@ export function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           <motion.a
             href="mailto:contacto@juandiaz.dev"
             initial={{ opacity: 0, y: 20 }}
@@ -203,7 +203,7 @@ export function ContactSection() {
             <h4 className="font-display font-bold mb-2">Email</h4>
             <p className="text-muted-foreground text-sm">contacto@juandiaz.dev</p>
           </motion.a>
-
+{/* 
           <motion.a
             href="tel:+56912345678"
             initial={{ opacity: 0, y: 20 }}
@@ -215,7 +215,7 @@ export function ContactSection() {
             <Phone className="w-8 h-8 text-primary mx-auto mb-4" />
             <h4 className="font-display font-bold mb-2">Teléfono</h4>
             <p className="text-muted-foreground text-sm">+56 9 1234 5678</p>
-          </motion.a>
+          </motion.a> */}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

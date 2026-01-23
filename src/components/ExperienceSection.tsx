@@ -4,21 +4,21 @@ import { Building2, Calendar } from "lucide-react";
 const experiences = [
   {
     title: "Operador Informático",
-    company: "IBAR",
-    period: "2021 - Presente",
+    company: "Biomedica Ingenieria",
+    period: "2025 - presente",
     description: "Responsable de monitorear, gestionar, controlar, realizar integraciones, dar soporte y mantenimiento a dispositivos integrados en sistema BMS en área de Control Centralizado.",
   },
-  {
-    title: "Programador de Sistemas",
-    company: "CHILE",
-    period: "2018 - 2021",
-    description: "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider.",
+  { 
+    title: "Operador Informático",
+    company: "ISAR",
+    period: "2021 - 2025",
+    description: "Control y gestión de operaciones en maquinarias de distintas áreas. Programación e integracion de canales horarios, alarmas, variables y constantes de funcionamiento en software EBO Schneider. Soporte y mantenimiento de sistema de video vigilancia.",
   },
   {
-    title: "Desarrollador Full Stack",
-    company: "Freelance",
-    period: "2017 - 2018",
-    description: "Desarrollo de aplicaciones web y móviles para diversos clientes, implementando soluciones personalizadas con tecnologías modernas.",
+    title: "Tecnico en Automatización",
+    company: "OHLA",
+    period: "2018 - 2021",
+    description: "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider.",
   },
 ];
 

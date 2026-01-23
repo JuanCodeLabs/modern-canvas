@@ -33,9 +33,9 @@ export function AboutSection() {
           >
             <p className="text-muted-foreground leading-relaxed text-lg">
               Hola, mi nombre es <span className="text-foreground font-semibold">Juan Díaz</span>, 
-              tengo 29 años y soy de Chile y actualmente vivo en la ciudad de Valparaíso. 
+              tengo 30 años y soy de Chile y actualmente vivo en la ciudad de Valparaíso. 
               Me encanta la programación y el diseño web desde que tenía 15 años. Mis metas actuales 
-              son lograr conseguir un trabajo remunerado en el cual pueda desempeñar dichas habilidades cómodamente.
+              son lograr conseguir un trabajo el cual se adapte a mis tiempos y pueda desempeñar dichas habilidades cómodamente.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
@@ -44,6 +44,10 @@ export function AboutSection() {
               programación estructurada, declarativa, modular y la orientada a objetos</span>. Aprendí y utilicé a lo largo 
               de mi carrera distintas metodologías de proyectos, tanto ágiles como tradicionales en un marco de 
               aprendizaje y en casos reales como parte de mi proceso formativo.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">  
+              Actualmente me encuentro continuando mis estudios en la <span className="text-foreground">Univerdidad Andres Bello</span>,
+              cursando la carrera de <span className="text-foreground font-semibold">Ingeniería Civil en Informática</span>.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
