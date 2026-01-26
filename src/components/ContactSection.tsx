@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, X, Download, FileText, ExternalLink, Phone, MapPin } from "lucide-react";
+import { useSocialLinks } from "@/contexts/SocialLinksContext";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -9,9 +10,10 @@ interface ContactModalProps {
 
 // Replace with your actual CV file path or URL
 const CV_PDF_URL = '/cv.pdf';
-const EMAIL_ADDRESS = 'tu@email.com';
+const EMAIL_ADDRESS = 'jdiazpalma1@gmail.com';
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const { linkedin , github } = useSocialLinks();
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -93,7 +95,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <p className="text-muted-foreground text-sm">Obtén mi currículum en formato PDF</p>
                   <div className="mt-4 flex items-center text-primary text-sm font-medium">
                     <FileText className="w-4 h-4 mr-2" />
-                    CV_Nombre_Apellido.pdf
+                    CV_Juan_Diaz.pdf
                   </div>
                 </button>
 
@@ -120,7 +122,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </p>
                 <div className="flex justify-center gap-4 mt-4">
                   <a
-                    href="https://linkedin.com"
+                    href={linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-full glass-card hover-glow"
@@ -142,7 +144,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     </svg>
                   </a>
                   <a
-                    href="https://github.com"
+                    href={github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-full glass-card hover-glow"
@@ -172,6 +174,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 }
 
 export function ContactSection() {
+  const { email } = useSocialLinks();
   return (
     <section id="contacto" className="py-20 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -192,7 +195,7 @@ export function ContactSection() {
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           <motion.a
-            href="mailto:contacto@juandiaz.dev"
+            href={email}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -201,7 +204,7 @@ export function ContactSection() {
           >
             <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
             <h4 className="font-display font-bold mb-2">Email</h4>
-            <p className="text-muted-foreground text-sm">contacto@juandiaz.dev</p>
+            <p className="text-muted-foreground text-sm">jdiazpalma1@gmail.com</p>
           </motion.a>
 {/* 
           <motion.a
