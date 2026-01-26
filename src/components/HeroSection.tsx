@@ -45,7 +45,7 @@ export function HeroSection() {
   }, [displayText, isDeleting, currentRoleIndex]);
 
   return (
-    <section id="inicio" className="min-h-screen flex flex-col items-center justify-center px-6 lg:px-12 pt-20">
+    <section id="inicio" className="min-h-[80vh] flex flex-col items-center justify-center px-6 lg:px-12 pt-8 pb-8">
       <div className="max-w-7xl mx-auto w-full text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +60,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 min-h-[1.2em]"
+          className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 min-h-[1.2em]"
         >
           <span className="gradient-text">{displayText}</span>
           <span 
@@ -74,7 +74,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="max-w-2xl mx-auto mb-8"
+          className="max-w-2xl mx-auto mb-6"
         >
           <p className="text-muted-foreground text-lg leading-relaxed">
             Mi nombre es <span className="text-foreground font-semibold">Juan Díaz</span>,{" "}
@@ -108,7 +108,7 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-20"
+          className="mt-12"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
