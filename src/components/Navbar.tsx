@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, MoreHorizontal, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useSocialLinks } from "@/contexts/SocialLinksContext";
+import { Link, useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   onContactClick: () => void;
@@ -13,6 +14,7 @@ const menuItems = [
   { name: "Trabajos", href: "#trabajos" },
   { name: "Experiencia", href: "#experiencia" },
   { name: "Conocimientos", href: "#conocimientos" },
+  { name: "Blog", href: "/blog" },
   { name: "Sobre mí", href: "#sobre-mi" },
   { name: "Contacto", href: "#contacto" },
 ];
@@ -20,6 +22,7 @@ const menuItems = [
 export function Navbar({ onContactClick }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { linkedin, github } = useSocialLinks();
+  const navigate = useNavigate();
 
   // Handle ESC key press to close menu
   useEffect(() => {
@@ -46,9 +49,32 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
   const scrollToSection = (href: string) => {
     setIsMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    
+    // Si es una ruta externa (como /blog), usar navigate de React Router
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
+    
+    // Si es un ancla, primero ir a la página principal luego hacer scroll
+    if (href.startsWith('#')) {
+      // Si no estamos en la página principal, navegar a home primero
+      if (window.location.pathname !== '/') {
+        navigate('/');
+        // Esperar a que la página cargue para hacer scroll
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else {
+        // Si ya estamos en home, solo hacer scroll
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
   };
 
@@ -77,10 +103,32 @@ export function Navbar({ onContactClick }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             className="hidden md:flex items-center gap-1 glass-card rounded-full px-2 py-1"
           >
-            {["Trabajos", "Experiencia", "Contacto"].map((item) => (
+            {["Inicio", "Trabajos", "Experiencia", "Blog", "Contacto"].map((item) => (
               <button
                 key={item}
-                onClick={() => scrollToSection(`#${item.toLowerCase()}`)}
+                onClick={() => {
+                  if (item === "Blog") {
+                    navigate("/blog");
+                  } else if (item === "Inicio") {
+                    navigate('/');
+                  } else {
+                    // Para las secciones, ir a home primero si no estamos allí
+                    if (window.location.pathname !== '/') {
+                      navigate('/');
+                      setTimeout(() => {
+                        const element = document.querySelector(`#${item.toLowerCase()}`);
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }, 100);
+                    } else {
+                      const element = document.querySelector(`#${item.toLowerCase()}`);
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }
+                  }
+                }}
                 className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-primary/10"
               >
                 {item}
