@@ -9,7 +9,7 @@ interface ContactModalProps {
 }
 
 // Replace with your actual CV file path or URL
-const CV_PDF_URL = '/cv.pdf';
+const CV_PDF_URL = '/CV_Juan_Diaz.pdf';
 const EMAIL_ADDRESS = 'jdiazpalma1@gmail.com';
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
@@ -33,8 +33,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const handleDownloadCV = () => {
     const link = document.createElement('a');
-    link.href = "./public/CV_Juan_Diaz.pdf";
+    link.href = CV_PDF_URL;
     link.download = 'CV_Juan_Diaz.pdf';
+    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
