@@ -2,7 +2,12 @@ import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const roles = ["Diseñador Web", "Automatizador", "Analista de Datos", "Programador"];
+const roles = [
+  "Automatizador",
+  "Programador",
+  "Especialista TI",
+  "Analista de Sistemas",
+];
 
 export function HeroSection() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -78,9 +83,10 @@ export function HeroSection() {
         >
           <p className="text-muted-foreground text-lg leading-relaxed">
             Mi nombre es <span className="text-foreground font-semibold">Juan Díaz</span>,{" "}
-            <span className="text-foreground font-medium">Programador y Analista de Datos</span>.
-            Soy desarrollador de aplicaciones atractivas y enfocadas en un diseño único y enfocado en{" "}
-            <span className="text-foreground font-semibold">cumplir las necesidades del cliente</span>.
+            <span className="text-foreground font-medium">Programador, Analista de datos y Técnico en Automatización Industrial</span>.
+            Desarrollo soluciones que integran la {" "}
+            <span className="text-foreground font-semibold">programación con procesos industriales</span>{" "}
+            para optimizar sistemas y automatizar tareas complejas.
           </p>
         </motion.div>
 

@@ -6,7 +6,7 @@ const experiences = [
     title: "Operador Informático",
     company: "Biomedica Ingenieria",
     period: "2025 - presente",
-    description: "Responsable de monitorear, gestionar, controlar, realizar integraciones, dar soporte y mantenimiento a dispositivos integrados en sistema BMS en área de Control Centralizado.",
+    description: "Responsable de monitorear, gestionar, controlar, realizar integraciones, dar soporte y mantenimiento a dispositivos integrados en sistema BMS en área de Control Centralizado. Creacion de aplicaciones web para automatizacion de procesos.",
   },
   { 
     title: "Operador Informático",
@@ -17,8 +17,14 @@ const experiences = [
   {
     title: "Tecnico en Automatización",
     company: "OHLA",
-    period: "2018 - 2021",
-    description: "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider.",
+    period: "2021 - 2021",
+    description: "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider. Normalizacion de protocolos y estándares de comunicación de red en base a solicitudes de clientes.",
+  },
+  {
+    title: "Tecnico en Automatización",
+    company: "BAS",
+    period: "2018 - 2020",
+    description: "Instalación de sistemas eléctricos y electrónicos en edificios comerciales. Configuración e instalación de dispositivos de corrientes débiles a software BMS. Creacion de interfaces de usuario para control y monitoreo de sistemas en plataforma Building Operator de Schneider.",
   },
 ];
 
