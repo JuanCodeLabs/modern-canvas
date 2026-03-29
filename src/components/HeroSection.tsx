@@ -50,7 +50,7 @@ export function HeroSection() {
   }, [displayText, isDeleting, currentRoleIndex]);
 
   return (
-    <section id="inicio" className="min-h-[80vh] flex flex-col items-center justify-center px-6 lg:px-12 pt-8 pb-8">
+    <section id="inicio" className="min-h-[80vh] flex flex-col items-center justify-center px-6 lg:px-12 pt-16 pb-8">
       <div className="max-w-7xl mx-auto w-full text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
