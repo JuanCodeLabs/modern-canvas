@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, X, Download, FileText, ExternalLink, Phone, MapPin } from "lucide-react";
+import { Mail, X, Download, FileText, ExternalLink, Phone, MapPin, LucideIcon } from "lucide-react";
 import { useSocialLinks } from "@/contexts/SocialLinksContext";
 
 interface ContactModalProps {
@@ -8,8 +8,30 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
-// Replace with your actual CV file path or URL
-const CV_PDF_URL = '/CV_Juan_Diaz.pdf';
+// Configuración de enlaces - fácil de agregar nuevos
+const CONTACT_LINKS = [
+  {
+    id: 'cv',
+    title: 'Revisar CV',
+    description: 'Obtén mi currículum en formato PDF',
+    url: 'https://drive.google.com/file/d/1DmRSLpJgqelB7Rh8LU4usi9BHXmvSFwd/view?usp=sharing',
+    icon: Download,
+    subtitle: 'Curriculum',
+    subtitleIcon: FileText,
+    target: '_blank'
+  },
+  {
+    id: 'email',
+    title: 'Enviar correo',
+    description: 'Contáctame directamente por email',
+    url: 'mailto:jdiazpalma1@gmail.com?subject=Contacto%20desde%20el%20portfolio',
+    icon: Mail,
+    subtitle: 'jdiazpalma1@gmail.com',
+    subtitleIcon: ExternalLink,
+    target: '_self'
+  }
+];
+
 const EMAIL_ADDRESS = 'jdiazpalma1@gmail.com';
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
@@ -31,14 +53,29 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     window.location.href = `mailto:${EMAIL_ADDRESS}?subject=Contacto%20desde%20el%20portfolio`;
   };
 
-  const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = CV_PDF_URL;
-    link.download = 'CV_Juan_Diaz.pdf';
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  // Componente reutilizable para tarjetas de enlace
+  const LinkCard = ({ link }: { link: typeof CONTACT_LINKS[0] }) => {
+    const Icon = link.icon;
+    const SubtitleIcon = link.subtitleIcon;
+    
+    return (
+      <a
+        href={link.url}
+        target={link.target}
+        rel={link.target === '_blank' ? 'noopener noreferrer' : ''}
+        className="group p-6 rounded-2xl glass-card border border-border/20 hover:border-primary/30 transition-all duration-300 hover-glow text-left block"
+      >
+        <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4 group-hover:scale-110 transition-transform">
+          <Icon className="w-6 h-6 text-primary" />
+        </div>
+        <h4 className="font-medium text-lg mb-2">{link.title}</h4>
+        <p className="text-muted-foreground text-sm">{link.description}</p>
+        <div className="mt-4 flex items-center text-primary text-sm font-medium">
+          <SubtitleIcon className="w-4 h-4 mr-2" />
+          {link.subtitle}
+        </div>
+      </a>
+    );
   };
 
   return (
@@ -84,37 +121,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Download CV Card */}
-                <button
-                  onClick={handleDownloadCV}
-                  className="group p-6 rounded-2xl glass-card border border-border/20 hover:border-primary/30 transition-all duration-300 hover-glow text-left"
-                >
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4 group-hover:scale-110 transition-transform">
-                    <Download className="w-6 h-6 text-primary" />
-                  </div>
-                  <h4 className="font-medium text-lg mb-2">Descargar CV</h4>
-                  <p className="text-muted-foreground text-sm">Obtén mi currículum en formato PDF</p>
-                  <div className="mt-4 flex items-center text-primary text-sm font-medium">
-                    <FileText className="w-4 h-4 mr-2" />
-                    CV_Juan_Diaz.pdf
-                  </div>
-                </button>
-
-                {/* Email Me Card */}
-                <button
-                  onClick={handleEmailClick}
-                  className="group p-6 rounded-2xl glass-card border border-border/20 hover:border-primary/30 transition-all duration-300 hover-glow text-left"
-                >
-                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4 group-hover:scale-110 transition-transform">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <h4 className="font-medium text-lg mb-2">Enviar correo</h4>
-                  <p className="text-muted-foreground text-sm">Contáctame directamente por email</p>
-                  <div className="mt-4 flex items-center text-primary text-sm font-medium">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    {EMAIL_ADDRESS}
-                  </div>
-                </button>
+                {CONTACT_LINKS.map((link) => (
+                  <LinkCard key={link.id} link={link} />
+                ))}
               </div>
 
               <div className="mt-8 pt-6 border-t border-border/20">
