@@ -31,7 +31,6 @@ Pero a medida que el proyecto crece, esa decisión empieza a pasarte la
 cuenta.
 
 Trabajar siempre en`main`provoca
-
 -   Mezcla de código estable con código experimental.
 -   Miedo a probar cosas nuevas.
 -   Commits desordenados.
@@ -40,17 +39,17 @@ Trabajar siempre en`main`provoca
 
 Aunque el proyecto sea personal, tu disciplina no debería serlo.
 
------
+---
 
 ## ¿Qué es realmente una branch?
 
-Una branch es una línea de desarrollo independiente que parte desde otra
-rama (normalmente `main`). Te permite trabajar en una funcionalidad
+Una branch es una *línea de desarrollo independiente* que parte desde otra
+rama ( normalmente `main`). Te permite trabajar en una funcionalidad
 específica sin afectar la base estable del proyecto.
 
 Piensa en ella como un espacio seguro para experimentar.
 
------
+---
 
 ## Beneficios reales de usar branches en proyectos propios
 
@@ -80,7 +79,7 @@ Crear una rama implica tomar una decisión consciente:
 
 Esa claridad mejora tu forma de pensar el código.
 
-------------------------------------------------------------------------
+---
 
 ### 3. Historial limpio y profesional
 
@@ -94,7 +93,7 @@ Esto hace que tu proyecto sea más entendible incluso meses después.
 
 Y si lo usas como portafolio, transmite profesionalismo.
 
-------------------------------------------------------------------------
+---
 
 ## Cómo crear y usar branches correctamente
 
@@ -112,11 +111,11 @@ git branch feature/auth
 git checkout feature/auth
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Forma moderna (recomendada)
 
-Git ahora ofrece comandos más claros:
+Git ahora ofrece comandos más claros (comprensibles y fáciles de recordar):
 
 ### Crear y cambiarte en un solo paso
 
@@ -130,9 +129,11 @@ git switch -c feature/auth
 git switch feature/auth
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Flujo de trabajo recomendado
+
+Para proyectos personales, sigue este flujo simple, que es algo común en el desarrollo:
 
 1.  Partes desde `main` estable.
 2.  Creas una branch para una funcionalidad.
@@ -144,17 +145,17 @@ git switch main
 git merge feature/auth
 ```
 
-5.  Eliminas la rama si ya no la necesitas:
+Si estabas realizando experimentos o pruebas y ya no los necesitas:
 
 ``` bash
 git branch -d feature/auth
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Convención simple para proyectos personales
 
-No necesitas algo complejo. Con esto es suficiente:
+No necesitas algo complejo. Con esto es suficiente, debemos considerar que todo esto lo estamos haciendo para nosotros mismos, por lo que no necesitamos ser tan estrictos:
 
 -   `feature/nombre-funcionalidad`
 -   `fix/descripcion-error`
@@ -169,21 +170,21 @@ git switch -c fix/error-calculo-total
 git switch -c refactor/api-client
 ```
 
-Ordena tu proyecto aunque seas el único desarrollador.
+Recuerda siempre mantener tu proyecto ordenado, aunque seas el único desarrollador.
 
-------------------------------------------------------------------------
+---
 
 ## Algo que aprendí con el tiempo
 
 El caos en proyectos personales no ocurre por falta de conocimiento
 técnico, sino por falta de estructura.
 
-Las branches no son solo una herramienta técnica.\
-Son una herramienta de disciplina.
+Las branches no son solo una herramienta técnica.
+**Son una herramienta de disciplina.**
 
-Te obligan a trabajar con intención.
+Te obligan a trabajar con intención, con gusto y con propósito.
 
-------------------------------------------------------------------------
+---
 
 ## Conclusión
 
@@ -197,4 +198,4 @@ como si fueran proyectos de producción.
 
 Y comienza por algo simple:
 
-**Nunca desarrolles directamente en `main`.**
+**Nunca desarrolles directamente en `main`, a menos que sea algo muy simple y que no afecte el resto del proyecto.**

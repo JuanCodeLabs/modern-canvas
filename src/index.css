@@ -170,20 +170,38 @@
 
 /* Code highlighting styles */
 .prose pre {
-  @apply bg-muted border border-border rounded-lg p-4 overflow-x-auto;
+  @apply bg-muted border border-border rounded-lg p-4 overflow-x-auto relative my-6;
+  background: hsl(var(--muted));
 }
 
 .prose code {
-  @apply bg-muted/50 px-1.5 py-0.5 rounded text-sm font-mono;
+  @apply bg-muted/50 px-1.5 py-0.5 rounded text-sm font-mono text-foreground;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 }
 
 .prose pre code {
-  @apply bg-transparent p-0;
+  @apply bg-transparent p-0 text-sm;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.prose pre::before {
+  content: attr(data-language);
+  @apply absolute top-2 right-2 text-xs text-muted-foreground uppercase tracking-wide;
+  font-family: 'Inter', sans-serif;
 }
 
 .hljs {
   background: transparent !important;
   color: hsl(var(--foreground)) !important;
+}
+
+/* Inline code emphasis */
+.prose strong code {
+  @apply font-semibold;
+}
+
+.prose em code {
+  @apply italic;
 }
 
 .prose {
@@ -266,7 +284,17 @@
 }
 
 .prose blockquote {
-  @apply border-l-4 border-l-primary text-muted-foreground italic;
+  @apply border-l-4 border-l-primary bg-primary/5 p-4 rounded-lg my-6 text-muted-foreground italic not-italic;
+  position: relative;
+}
+
+.prose blockquote p {
+  @apply text-foreground font-medium;
+  margin: 0;
+}
+
+.prose blockquote p:last-child {
+  @apply text-muted-foreground text-sm mt-2 font-normal;
 }
 
 .prose a {
@@ -275,9 +303,127 @@
 
 .prose ul,
 .prose ol {
-  @apply text-foreground;
+  @apply text-foreground my-6;
+  padding-left: 1.5rem;
+}
+
+.prose ul {
+  @apply list-none;
+}
+
+.prose ul li {
+  @apply text-foreground relative pl-6 mb-3;
+  position: relative;
+}
+
+.prose ul li::before {
+  content: "•";
+  @apply text-primary absolute left-0 top-0 font-bold;
+  font-size: 1.2em;
+  line-height: 1.4;
+}
+
+.prose ol {
+  @apply list-decimal;
+  padding-left: 2rem;
+}
+
+.prose ol li {
+  @apply text-foreground mb-3 pl-2;
 }
 
 .prose li {
-  @apply text-foreground;
+  @apply leading-relaxed;
+}
+
+.prose li p {
+  @apply mb-2;
+}
+
+.prose li p:last-child {
+  @apply mb-0;
+}
+
+/* Table styling */
+.prose table {
+  @apply my-6 border-collapse border border-border rounded-lg overflow-hidden;
+  min-width: 100%;
+}
+
+.prose table thead {
+  @apply bg-muted;
+}
+
+.prose table th {
+  @apply border border-border px-4 py-3 text-left font-semibold text-foreground;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.prose table td {
+  @apply border border-border px-4 py-3 text-foreground;
+}
+
+.prose table tbody tr:hover {
+  @apply bg-muted/50;
+}
+
+.prose table tbody tr:nth-child(even) {
+  @apply bg-muted/20;
+}
+
+/* Custom callout styles */
+.prose .callout {
+  @apply my-6 p-4 rounded-lg border-l-4;
+}
+
+.prose .callout.info {
+  @apply bg-blue-500/10 border-blue-500 text-blue-900 dark:text-blue-100;
+}
+
+.prose .callout.warning {
+  @apply bg-yellow-500/10 border-yellow-500 text-yellow-900 dark:text-yellow-100;
+}
+
+.prose .callout.danger {
+  @apply bg-red-500/10 border-red-500 text-red-900 dark:text-red-100;
+}
+
+.prose .callout.success {
+  @apply bg-green-500/10 border-green-500 text-green-900 dark:text-green-100;
+}
+
+.prose .callout-title {
+  @apply font-semibold mb-2 text-foreground;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.prose .callout-content {
+  @apply text-sm leading-relaxed;
+}
+
+/* Improved spacing for special elements */
+.prose .center {
+  @apply text-center my-8;
+}
+
+.prose .highlight {
+  @apply bg-primary/10 px-2 py-1 rounded font-medium text-primary;
+}
+
+/* Better image styling */
+.prose img {
+  @apply rounded-lg shadow-lg my-6 mx-auto block;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose img[src*="emoji"] {
+  @apply inline shadow-none my-0 mx-0;
+}
+
+/* Horizontal rule improvements */
+.prose hr {
+  @apply border-0 border-t border-border/50 my-8;
+  background: linear-gradient(to right, transparent, hsl(var(--border) / 0.5), transparent);
+  height: 1px;
 }

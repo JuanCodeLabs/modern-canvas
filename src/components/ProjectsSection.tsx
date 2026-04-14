@@ -32,15 +32,15 @@ const projects: Project[] = [
     technologies: ["TypeScript", "Supabase", "Tailwind", "Chart.js", "React", "Vite", "Stripe"],
     liveUrl: "https://tracelite.org/",
   },
-  {
-    id: 3,
-    title: "LinuxPro E-Commerce",
-    description: "Tienda online con gestión de inventario.",
-    fullDescription: "Plataforma completa de comercio electrónico con carrito de compras, pasarela de pagos, gestión de inventario y sistema de envíos integrado.",
-    image: "linuxpro.png",
-    technologies: ["React", "Node.js", "Stripe", "Tailwind", "Prisma", "PostgreSQL", "Supabase"],
-    liveUrl: "https://linuxpro.vercel.app/",
-  },
+  // {
+  //   id: 3,
+  //   title: "Code Vista Labs",
+  //   description: "Tienda online con gestión de inventario.",
+  //   fullDescription: "Plataforma completa de comercio electrónico con carrito de compras, pasarela de pagos, gestión de inventario y sistema de envíos integrado.",
+  //   image: "linuxpro.png",
+  //   technologies: ["React", "Node.js", "Stripe", "Tailwind", "Prisma", "PostgreSQL", "Supabase"],
+  //   liveUrl: "https://linuxpro.vercel.app/",
+  // },
 ];
 
 export function ProjectsSection() {
