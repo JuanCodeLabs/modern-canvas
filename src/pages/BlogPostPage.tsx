@@ -9,6 +9,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const BlogPostPage = () => {
   const { slug } = useParams();
@@ -132,10 +134,10 @@ const BlogPostPage = () => {
             </div>
 
             {/* Article Content */}
-            <div className="prose prose-invert prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-code:text-foreground prose-blockquote:text-muted-foreground prose-blockquote:border-l-primary prose-a:text-primary prose-pre:bg-muted prose-pre:border prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground max-w-none">
+            <div className="prose prose-lg prose-invert prose-headings:text-foreground prose-headings:scroll-mt-20 prose-p:text-foreground/90 prose-p:leading-7 prose-p:mb-4 prose-strong:text-foreground prose-code:text-foreground prose-code:bg-primary/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-blockquote:text-muted-foreground prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:my-6 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-pre:bg-muted/50 prose-pre:border prose-pre:border-border/50 prose-pre:rounded-lg prose-pre:p-4 prose-pre:my-6 prose-ul:text-foreground/90 prose-ol:text-foreground/90 prose-li:text-foreground/90 prose-li:mb-2 prose-hr:border-border/50 prose-hr:my-8 prose-img:rounded-lg prose-img:shadow-lg prose-table:text-foreground/90 prose-table:border-border/50 prose-th:bg-primary/10 prose-td:border-border/30 max-w-none">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings, rehypeHighlight, rehypeRaw]}
               >
                 {post.content}
               </ReactMarkdown>
