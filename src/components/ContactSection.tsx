@@ -32,12 +32,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   };
 
   const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = "./public/CV_Juan_Diaz.pdf";
-    link.download = 'CV_Juan_Diaz.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.open('/CV_Juan_Diaz.pdf', '_blank');
   };
 
   return (
