@@ -5,8 +5,10 @@ import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { getAllPosts, Post } from "@/lib/posts";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const BlogPage = () => {
+  const { t } = useLanguage();
   const [blogPosts, setBlogPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,11 +48,10 @@ const BlogPage = () => {
             className="text-left mb-16"
           >
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
-              <span className="gradient-text">Blog</span>
+              <span className="gradient-text">{t.blog.title}</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-              Artículos sobre desarrollo web, tecnología y mejores prácticas. 
-              Compartiendo conocimiento y experiencias del mundo del desarrollo software.
+              {t.blog.description}
             </p>
           </motion.div>
 
@@ -96,7 +97,7 @@ const BlogPage = () => {
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          <span>{new Date(post.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                          <span>{new Date(post.date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
@@ -119,7 +120,7 @@ const BlogPage = () => {
             className="text-center mt-12"
           >
             <button className="glass-card px-8 py-3 rounded-full text-foreground hover-glow transition-all duration-300 font-medium hover:scale-105">
-              Cargar más artículos
+              {t.blog.loadMore}
             </button>
           </motion.div>
         </div>

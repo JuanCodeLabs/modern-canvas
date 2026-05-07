@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
-
-const roles = ["Diseñador Web", "Automatizador", "Analista de Datos", "Programador"];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function HeroSection() {
+  const { t } = useLanguage();
+  const roles = t.hero.roles;
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -45,7 +46,7 @@ export function HeroSection() {
   }, [displayText, isDeleting, currentRoleIndex]);
 
   return (
-    <section id="inicio" className="min-h-[80vh] flex flex-col items-center justify-center px-6 lg:px-12 pt-8 pb-8">
+    <section id="home" className="min-h-[80vh] flex flex-col items-center justify-center px-6 lg:px-12 pt-16 pb-8">
       <div className="max-w-7xl mx-auto w-full text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -53,7 +54,7 @@ export function HeroSection() {
           transition={{ delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground mb-4 font-display"
         >
-          Soy
+          {t.hero.iAm}
         </motion.p>
         
         <motion.h1
@@ -77,10 +78,7 @@ export function HeroSection() {
           className="max-w-2xl mx-auto mb-6"
         >
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Mi nombre es <span className="text-foreground font-semibold">Juan Díaz</span>,{" "}
-            <span className="text-foreground font-medium">Programador y Analista de Datos</span>.
-            Soy desarrollador de aplicaciones atractivas y enfocadas en un diseño único y enfocado en{" "}
-            <span className="text-foreground font-semibold">cumplir las necesidades del cliente</span>.
+            {t.hero.intro}
           </p>
         </motion.div>
 
@@ -91,16 +89,16 @@ export function HeroSection() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <a
-            href="#trabajos"
+            href="#projects"
             className="glass-card px-8 py-3 rounded-full font-medium hover-glow transition-all duration-300 hover:bg-primary/20"
           >
-            Trabajos
+            {t.hero.viewProjects}
           </a>
           <a
-            href="#experiencia"
+            href="#experience"
             className="glass-card px-8 py-3 rounded-full font-medium hover-glow transition-all duration-300 hover:bg-primary/20"
           >
-            Experiencia
+            {t.hero.viewExperience}
           </a>
         </motion.div>
 

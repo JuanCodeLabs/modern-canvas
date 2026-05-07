@@ -4,25 +4,28 @@ import { Github, Linkedin, MoreHorizontal, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useSocialLinks } from "@/contexts/SocialLinksContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface NavbarProps {
   onContactClick: () => void;
 }
 
-const menuItems = [
-  { name: "Inicio", href: "#inicio" },
-  { name: "Trabajos", href: "#trabajos" },
-  { name: "Experiencia", href: "#experiencia" },
-  { name: "Conocimientos", href: "#conocimientos" },
-  { name: "Blog", href: "/blog" },
-  { name: "Sobre mí", href: "#sobre-mi" },
-  { name: "Contacto", href: "#contacto" },
-];
 
 export function Navbar({ onContactClick }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { linkedin, github } = useSocialLinks();
+  const { t } = useLanguage();
   const navigate = useNavigate();
+
+  const menuItems = [
+    { name: t.nav.home, href: "#home" },
+    { name: t.nav.projects, href: "#projects" },
+    { name: t.nav.experience, href: "#experience" },
+    { name: t.nav.skills, href: "#skills" },
+    { name: t.nav.blog, href: "/blog" },
+    { name: t.nav.about, href: "#about" },
+    { name: t.nav.contact, href: "#contact" },
+  ];
 
   // Handle ESC key press to close menu
   useEffect(() => {
@@ -93,7 +96,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
           >
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Disponible para trabajar
+              {t.nav.availableForWork}
             </span>
           </motion.button>
 
@@ -103,28 +106,36 @@ export function Navbar({ onContactClick }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             className="hidden md:flex items-center gap-1 glass-card rounded-full px-2 py-1"
           >
-            {["Inicio", "Trabajos", "Experiencia", "Blog", "Contacto"].map((item) => (
+            {[t.nav.home, t.nav.projects, t.nav.experience, t.nav.blog, t.nav.contact].map((item) => (
               <button
                 key={item}
                 onClick={() => {
-                  if (item === "Blog") {
+                  if (item === t.nav.blog) {
                     navigate("/blog");
-                  } else if (item === "Inicio") {
+                  } else if (item === t.nav.home) {
                     navigate('/');
                   } else {
-                    // Para las secciones, ir a home primero si no estamos allí
-                    if (window.location.pathname !== '/') {
-                      navigate('/');
-                      setTimeout(() => {
-                        const element = document.querySelector(`#${item.toLowerCase()}`);
+                    // Navigate to sections
+                    const sectionMap: Record<string, string> = {
+                      [t.nav.projects]: "#projects",
+                      [t.nav.experience]: "#experience",
+                      [t.nav.contact]: "#contact",
+                    };
+                    const targetSection = sectionMap[item];
+                    if (targetSection) {
+                      if (window.location.pathname !== '/') {
+                        navigate('/');
+                        setTimeout(() => {
+                          const element = document.querySelector(targetSection);
+                          if (element) {
+                            element.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }, 100);
+                      } else {
+                        const element = document.querySelector(targetSection);
                         if (element) {
                           element.scrollIntoView({ behavior: "smooth" });
                         }
-                      }, 100);
-                    } else {
-                      const element = document.querySelector(`#${item.toLowerCase()}`);
-                      if (element) {
-                        element.scrollIntoView({ behavior: "smooth" });
                       }
                     }
                   }

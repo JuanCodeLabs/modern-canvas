@@ -1,30 +1,32 @@
 import { motion } from "framer-motion";
 import { Building2, Calendar } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const experiences = [
   {
-    title: "Operador Informático",
+    title: "IT Operator",
     company: "Biomedica Ingenieria",
-    period: "2025 - presente",
-    description: "Responsable de monitorear, gestionar, controlar, realizar integraciones, dar soporte y mantenimiento a dispositivos integrados en sistema BMS en área de Control Centralizado.",
+    period: "2025 - present",
+    description: "Responsible for monitoring, managing, controlling, performing integrations, providing support and maintenance to devices integrated in BMS system in Centralized Control area.",
   },
   { 
-    title: "Operador Informático",
+    title: "IT Operator",
     company: "ISAR",
     period: "2021 - 2025",
-    description: "Control y gestión de operaciones en maquinarias de distintas áreas. Programación e integracion de canales horarios, alarmas, variables y constantes de funcionamiento en software EBO Schneider. Soporte y mantenimiento de sistema de video vigilancia.",
+    description: "Control and management of operations in machinery from different areas. Programming and integration of time channels, alarms, variables and operating constants in Schneider EBO software. Support and maintenance of video surveillance system.",
   },
   {
-    title: "Tecnico en Automatización",
+    title: "Automation Technician",
     company: "OHLA",
     period: "2018 - 2021",
-    description: "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider.",
+    description: "Responsible for performing integration, operation programming and UX/UI design of various devices in low current systems integrated in Schneider Building Operator workstation platform.",
   },
 ];
 
 export function ExperienceSection() {
+  const { t } = useLanguage();
   return (
-    <section id="experiencia" className="py-20 px-6 lg:px-12">
+    <section id="experience" className="py-20 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,10 +38,10 @@ export function ExperienceSection() {
             <Building2 className="w-8 h-8 text-primary" />
             <div>
               <h2 className="text-3xl md:text-4xl font-display font-bold">
-                Experiencia
+                {t.experience.title}
               </h2>
               <h2 className="text-3xl md:text-4xl font-display font-bold gradient-text">
-                profesional
+                {t.experience.title2}
               </h2>
             </div>
           </div>

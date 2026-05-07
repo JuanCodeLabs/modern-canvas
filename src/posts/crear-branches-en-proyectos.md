@@ -1,111 +1,102 @@
 ---
-title: "La importancia de crear branches en proyectos personales"
-excerpt: "Trabajar solo no significa trabajar sin estructura. En este
-  artículo explico por qué crear branches en proyectos personales mejora
-  tu disciplina, seguridad y profesionalismo como desarrollador."
+title: "The importance of creating branches in personal projects"
+excerpt: "Working alone doesn't mean working without structure. In this
+  article I explain why creating branches in personal projects improves
+  your discipline, security and professionalism as a developer."
 date: "2026-02-21"
 author: "Juan Díaz"
-tags: ["Git", "Control de Versiones", "Buenas Prácticas"]
+tags: ["Git", "Version Control", "Best Practices"]
 ---
 
-Tras mucho tiempo desarrollando proyectos propios -desde pequeños
-scripts hasta aplicaciones más completas- he cometido errores que
-parecían insignificantes, pero que terminaron rompiendo funcionalidades
-completas o generando desorden difícil de mantener.
+After a long time developing my own projects - from small scripts to more complete applications - I've made mistakes that seemed insignificant, but ended up breaking complete functionalities or generating disorder difficult to maintain.
 
-En ese proceso entendí algo importante: usar Git no es suficiente.\
-Hay que usarlo correctamente.
+In that process I understood something important: using Git is not enough.\
+You have to use it correctly.
 
-Y una de las prácticas más subestimadas, especialmente cuando trabajamos
-solos, es la creación de **branches**.
+And one of the most underestimated practices, especially when we work alone, is the creation of **branches**.
 
 
-## "Como trabajo solo, no necesito ramas"
+## "Since I work alone, I don't need branches"
 
-Es muy común pensar:
+It's very common to think:
 
-> **"Si nadie más toca el código, puedo trabajar directamente en `main`"**.
+> **"If no one else touches the code, I can work directly in `main`"**.
 
-Al principio parece práctico. Más rápido. Más simple.\
-Pero a medida que el proyecto crece, esa decisión empieza a pasarte la
-cuenta.
+At first it seems practical. Faster. Simpler.\
+But as the project grows, that decision starts to backfire.
 
-Trabajar siempre en`main`provoca
--   Mezcla de código estable con código experimental.
--   Miedo a probar cosas nuevas.
--   Commits desordenados.
--   Dificultad para volver atrás cuando algo se rompe.
--   Historial poco profesional.
+Always working in `main` causes:
+-   Mixing stable code with experimental code.
+-   Fear of trying new things.
+-   Disorganized commits.
+-   Difficulty going back when something breaks.
+-   Unprofessional history.
 
-Aunque el proyecto sea personal, tu disciplina no debería serlo.
+Even if the project is personal, your discipline shouldn't be.
 
 ---
 
-## ¿Qué es realmente una branch?
+## What is really a branch?
 
-Una branch es una *línea de desarrollo independiente* que parte desde otra
-rama ( normalmente `main`). Te permite trabajar en una funcionalidad
-específica sin afectar la base estable del proyecto.
+A branch is an *independent line of development* that starts from another branch (normally `main`). It allows you to work on a specific functionality without affecting the stable base of the project.
 
-Piensa en ella como un espacio seguro para experimentar.
+Think of it as a safe space to experiment.
 
 ---
 
-## Beneficios reales de usar branches en proyectos propios
+## Real benefits of using branches in personal projects
 
-### 1. Seguridad para experimentar
+### 1. Security to experiment
 
-Puedes probar una nueva arquitectura, refactorizar un módulo completo o
-implementar una funcionalidad compleja sin miedo a romper lo que ya
-funciona.
+You can try a new architecture, refactor a complete module or implement a complex functionality without fear of breaking what already works.
 
-Si algo sale mal:
+If something goes wrong:
 
 ``` bash
-git branch -D feature/experimento
+git branch -D feature/experiment
 ```
 
-Y listo. Tu proyecto principal sigue intacto.
+And that's it. Your main project remains intact.
 
 ---
 
-### 2. Mejor organización mental
+### 2. Better mental organization
 
-Crear una rama implica tomar una decisión consciente:
+Creating a branch implies making a conscious decision:
 
--   ¿Qué estoy desarrollando?
--   ¿Cuál es el objetivo?
--   ¿Cuándo está terminado?
+-   What am I developing?
+-   What is the objective?
+-   When is it finished?
 
-Esa claridad mejora tu forma de pensar el código.
+That clarity improves your way of thinking about code.
 
 ---
 
-### 3. Historial limpio y profesional
+### 3. Clean and professional history
 
-Cuando separas por ramas, tus commits cuentan una historia clara:
+When you separate by branches, your commits tell a clear story:
 
 -   `feature/login`
--   `fix/validacion-email`
+-   `fix/email-validation`
 -   `refactor/user-service`
 
-Esto hace que tu proyecto sea más entendible incluso meses después.
+This makes your project more understandable even months later.
 
-Y si lo usas como portafolio, transmite profesionalismo.
+And if you use it as a portfolio, it conveys professionalism.
 
 ---
 
-## Cómo crear y usar branches correctamente
+## How to create and use branches correctly
 
-Supongamos que quieres agregar autenticación a tu proyecto.
+Suppose you want to add authentication to your project.
 
-### Crear una nueva branch
+### Create a new branch
 
 ``` bash
 git branch feature/auth
 ```
 
-### Cambiarte a la branch
+### Switch to the branch
 
 ``` bash
 git checkout feature/auth
@@ -113,17 +104,17 @@ git checkout feature/auth
 
 ---
 
-## Forma moderna (recomendada)
+## Modern way (recommended)
 
-Git ahora ofrece comandos más claros (comprensibles y fáciles de recordar):
+Git now offers clearer commands (understandable and easy to remember):
 
-### Crear y cambiarte en un solo paso
+### Create and switch in one step
 
 ``` bash
 git switch -c feature/auth
 ```
 
-### Cambiarte a una branch existente
+### Switch to an existing branch
 
 ``` bash
 git switch feature/auth
@@ -131,21 +122,21 @@ git switch feature/auth
 
 ---
 
-## Flujo de trabajo recomendado
+## Recommended workflow
 
-Para proyectos personales, sigue este flujo simple, que es algo común en el desarrollo:
+For personal projects, follow this simple flow, which is common in development:
 
-1.  Partes desde `main` estable.
-2.  Creas una branch para una funcionalidad.
-3.  Trabajas y haces commits pequeños y claros.
-4.  Cuando está lista y probada, haces merge.
+1.  Start from stable `main`.
+2.  Create a branch for a functionality.
+3.  Work and make small, clear commits.
+4.  When ready and tested, merge.
 
 ``` bash
 git switch main
 git merge feature/auth
 ```
 
-Si estabas realizando experimentos o pruebas y ya no los necesitas:
+If you were doing experiments or tests and no longer need them:
 
 ``` bash
 git branch -d feature/auth
@@ -153,49 +144,46 @@ git branch -d feature/auth
 
 ---
 
-## Convención simple para proyectos personales
+## Simple convention for personal projects
 
-No necesitas algo complejo. Con esto es suficiente, debemos considerar que todo esto lo estamos haciendo para nosotros mismos, por lo que no necesitamos ser tan estrictos:
+You don't need something complex. This is enough, we must consider that we are doing all this for ourselves, so we don't need to be so strict:
 
--   `feature/nombre-funcionalidad`
--   `fix/descripcion-error`
--   `refactor/modulo`
+-   `feature/functionality-name`
+-   `fix/error-description`
+-   `refactor/module`
 -   `experiment/idea`
 
-Ejemplos:
+Examples:
 
 ``` bash
 git switch -c feature/dashboard
-git switch -c fix/error-calculo-total
+git switch -c fix/total-calculation-error
 git switch -c refactor/api-client
 ```
 
-Recuerda siempre mantener tu proyecto ordenado, aunque seas el único desarrollador.
+Remember to always keep your project organized, even if you are the only developer.
 
 ---
 
-## Algo que aprendí con el tiempo
+## Something I learned over time
 
-El caos en proyectos personales no ocurre por falta de conocimiento
-técnico, sino por falta de estructura.
+Chaos in personal projects doesn't occur due to lack of technical knowledge, but due to lack of structure.
 
-Las branches no son solo una herramienta técnica.
-**Son una herramienta de disciplina.**
+Branches are not just a technical tool.
+**They are a discipline tool.**
 
-Te obligan a trabajar con intención, con gusto y con propósito.
+They force you to work with intention, with pleasure and with purpose.
 
 ---
 
-## Conclusión
+## Conclusion
 
-Crear branches en proyectos personales no es exageración ni burocracia
-innecesaria. Es una inversión en claridad, seguridad y profesionalismo.
+Creating branches in personal projects is not exaggeration or unnecessary bureaucracy. It's an investment in clarity, security and professionalism.
 
-Trabajar solo no significa trabajar sin estándares.
+Working alone doesn't mean working without standards.
 
-Si quieres crecer como desarrollador, trata tus proyectos personales
-como si fueran proyectos de producción.
+If you want to grow as a developer, treat your personal projects as if they were production projects.
 
-Y comienza por algo simple:
+And start with something simple:
 
-**Nunca desarrolles directamente en `main`, a menos que sea algo muy simple y que no afecte el resto del proyecto.**
+**Never develop directly in `main`, unless it's something very simple that doesn't affect the rest of the project.**

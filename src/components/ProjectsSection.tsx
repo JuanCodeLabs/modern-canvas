@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, X, Briefcase } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Project {
   id: number;
@@ -17,8 +18,8 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Noe Botes",
-    description: "Plataforma de navegación y contacto para empresa de reparacion de embarcaciones.",
-    fullDescription: "Sistema completo de gestión para servicios de reparación de embarcaciones.",
+    description: "Navigation and contact platform for boat repair company.",
+    fullDescription: "Complete management system for boat repair services.",
     image: "https://c.pxhere.com/photos/f5/6d/zachranari_inflatable_boat_ocean_swanage_bay-710973.jpg!d",
     technologies: ["React", "Tailwind"],
     liveUrl: "https://noebotes.vercel.app/",
@@ -26,8 +27,8 @@ const projects: Project[] = [
   {
     id: 2,
     title: "Tracelite",
-    description: "LandingPage y Panel de control para visualización de equipos y generación de reportes.",
-    fullDescription: "Dashboard interactivo con gráficos en tiempo real, KPIs personalizables y reportes automatizados. Integración con múltiples fuentes de datos.",
+    description: "Landing page and control panel for equipment visualization and report generation.",
+    fullDescription: "Interactive dashboard with real-time charts, customizable KPIs and automated reports. Integration with multiple data sources.",
     image: "tracelite.png",
     technologies: ["TypeScript", "Supabase", "Tailwind", "Chart.js", "React", "Vite", "Stripe"],
     liveUrl: "https://tracelite.org/",
@@ -35,8 +36,8 @@ const projects: Project[] = [
   {
     id: 3,
     title: "LinuxPro E-Commerce",
-    description: "Tienda online con gestión de inventario.",
-    fullDescription: "Plataforma completa de comercio electrónico con carrito de compras, pasarela de pagos, gestión de inventario y sistema de envíos integrado.",
+    description: "Online store with inventory management.",
+    fullDescription: "Complete e-commerce platform with shopping cart, payment gateway, inventory management and integrated shipping system.",
     image: "linuxpro.png",
     technologies: ["React", "Node.js", "Stripe", "Tailwind", "Prisma", "PostgreSQL", "Supabase"],
     liveUrl: "https://linuxpro.vercel.app/",
@@ -44,10 +45,11 @@ const projects: Project[] = [
 ];
 
 export function ProjectsSection() {
+  const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section id="trabajos" className="py-20 px-6 lg:px-12">
+    <section id="projects" className="py-20 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,16 +61,15 @@ export function ProjectsSection() {
             <Briefcase className="w-8 h-8 text-primary" />
             <div>
               <h2 className="text-3xl md:text-4xl font-display font-bold">
-                Trabajos
+                {t.projects.title}
               </h2>
               <h2 className="text-3xl md:text-4xl font-display font-bold gradient-text">
-                realizados
+                {t.projects.title2}
               </h2>
             </div>
           </div>
           <p className="text-muted-foreground max-w-xl">
-            Los trabajos que he realizado durante este tiempo son los siguientes.
-            Presiona en cualquiera para más información.
+            {t.projects.description}
           </p>
         </motion.div>
 
@@ -175,7 +176,7 @@ export function ProjectsSection() {
                       className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      Ver pagina
+                      {t.projects.viewSite}
                     </a>
                   )}
                   {selectedProject.githubUrl && (
@@ -186,7 +187,7 @@ export function ProjectsSection() {
                       className="flex items-center gap-2 px-6 py-3 rounded-full glass-card font-medium hover-glow transition-all"
                     >
                       <Github className="w-4 h-4" />
-                      Código
+                      {t.projects.code}
                     </a>
                   )}
                 </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, X, Download, FileText, ExternalLink, Phone, MapPin } from "lucide-react";
 import { useSocialLinks } from "@/contexts/SocialLinksContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ const EMAIL_ADDRESS = 'jdiazpalma1@gmail.com';
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const { linkedin , github } = useSocialLinks();
+  const { t } = useLanguage();
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -28,7 +30,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   }, [isOpen]);
 
   const handleEmailClick = () => {
-    window.location.href = `mailto:${EMAIL_ADDRESS}?subject=Contacto%20desde%20el%20portfolio`;
+    window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(t.contact.emailSubject)}`;
   };
 
   const handleDownloadCV = () => {
@@ -64,8 +66,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <Mail className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-2xl md:text-3xl">Contáctame</h3>
-                    <p className="text-muted-foreground">Estoy disponible para trabajar</p>
+                    <h3 className="font-display font-bold text-2xl md:text-3xl">{t.contact.title}</h3>
+                    <p className="text-muted-foreground">{t.contact.subtitle}</p>
                   </div>
                 </div>
                 <button
@@ -86,8 +88,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4 group-hover:scale-110 transition-transform">
                     <Download className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-medium text-lg mb-2">Descargar CV</h4>
-                  <p className="text-muted-foreground text-sm">Obtén mi currículum en formato PDF</p>
+                  <h4 className="font-medium text-lg mb-2">{t.contact.downloadCV}</h4>
+                  <p className="text-muted-foreground text-sm">{t.contact.cvDescription}</p>
                   <div className="mt-4 flex items-center text-primary text-sm font-medium">
                     <FileText className="w-4 h-4 mr-2" />
                     CV_Juan_Diaz.pdf
@@ -102,8 +104,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4 group-hover:scale-110 transition-transform">
                     <Mail className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-medium text-lg mb-2">Enviar correo</h4>
-                  <p className="text-muted-foreground text-sm">Contáctame directamente por email</p>
+                  <h4 className="font-medium text-lg mb-2">{t.contact.sendEmail}</h4>
+                  <p className="text-muted-foreground text-sm">{t.contact.emailDescription}</p>
                   <div className="mt-4 flex items-center text-primary text-sm font-medium">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     {EMAIL_ADDRESS}
@@ -113,7 +115,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
               <div className="mt-8 pt-6 border-t border-border/20">
                 <p className="text-muted-foreground text-sm text-center">
-                  O contáctame a través de mis redes sociales
+                  {t.contact.orContact}
                 </p>
                 <div className="flex justify-center gap-4 mt-4">
                   <a
@@ -170,8 +172,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
 export function ContactSection() {
   const { email } = useSocialLinks();
+  const { t } = useLanguage();
   return (
-    <section id="contacto" className="py-20 px-6 lg:px-12">
+    <section id="contact" className="py-20 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -180,11 +183,10 @@ export function ContactSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            ¿Tienes un proyecto en mente?
+            {t.contact.sectionTitle}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Estoy disponible para nuevos proyectos y oportunidades. 
-            No dudes en contactarme.
+            {t.contact.sectionDescription}
           </p>
         </motion.div>
 
@@ -198,7 +200,7 @@ export function ContactSection() {
             className="glass-card p-6 rounded-2xl text-center hover-glow transition-all duration-300 hover:scale-105"
           >
             <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
-            <h4 className="font-display font-bold mb-2">Email</h4>
+            <h4 className="font-display font-bold mb-2">{t.contact.email}</h4>
             <p className="text-muted-foreground text-sm">jdiazpalma1@gmail.com</p>
           </motion.a>
 {/* 
@@ -223,7 +225,7 @@ export function ContactSection() {
             className="glass-card p-6 rounded-2xl text-center hover-glow transition-all duration-300"
           >
             <MapPin className="w-8 h-8 text-primary mx-auto mb-4" />
-            <h4 className="font-display font-bold mb-2">Ubicación</h4>
+            <h4 className="font-display font-bold mb-2">{t.contact.location}</h4>
             <p className="text-muted-foreground text-sm">Valparaíso, Chile</p>
           </motion.div>
         </div>

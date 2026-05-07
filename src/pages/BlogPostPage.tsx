@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { getPostBySlug, getAllPosts, Post } from "@/lib/posts";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -14,6 +15,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const BlogPostPage = () => {
   const { slug } = useParams();
+  const { t } = useLanguage();
   const [post, setPost] = useState<Post | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,9 +64,9 @@ const BlogPostPage = () => {
         <Navbar onContactClick={() => {}} />
         <main className="pt-24 pb-16 px-6 lg:px-12">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-4">Post no encontrado</h1>
+            <h1 className="text-4xl font-bold mb-4">{t.blog.postNotFound}</h1>
             <Link to="/blog" className="text-primary hover:underline">
-              Volver al blog
+              {t.blog.backToBlog}
             </Link>
           </div>
         </main>
@@ -90,7 +92,7 @@ const BlogPostPage = () => {
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              Volver al blog
+              {t.blog.backToBlog}
             </Link>
           </motion.div>
 
@@ -125,11 +127,11 @@ const BlogPostPage = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>{new Date(post.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                <span>{new Date(post.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>{post.readTime} de lectura</span>
+                <span>{post.readTime} {t.blog.readTime}</span>
               </div>
             </div>
 
@@ -149,16 +151,16 @@ const BlogPostPage = () => {
                 <div className="flex items-center gap-4">
                   <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                     <Github className="w-5 h-5" />
-                    Editar en GitHub
+                    {t.blog.editOnGitHub}
                   </button>
                   <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
                     <MessageCircle className="w-5 h-5" />
-                    Comentarios
+                    {t.blog.comments}
                   </button>
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Compartir:</span>
+                  <span className="text-sm text-muted-foreground">{t.blog.share}</span>
                   <div className="flex gap-2">
                     <button className="p-2 rounded-full glass-card hover-glow transition-all duration-300">
                       <Github className="w-4 h-4" />
@@ -180,7 +182,7 @@ const BlogPostPage = () => {
             className="glass-card p-8 rounded-2xl"
           >
             <h2 className="text-2xl font-display font-bold mb-6 text-foreground">
-              Artículos relacionados
+              {t.blog.relatedPosts}
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {relatedPosts.map((relatedPost) => (
