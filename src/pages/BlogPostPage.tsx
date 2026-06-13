@@ -98,7 +98,7 @@ const BlogPostPage = () => {
           <motion.article
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-card p-8 lg:p-12 rounded-2xl mb-8"
+            className=" p-8 lg:p-12 rounded-2xl mb-8"
           >
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mb-6">
