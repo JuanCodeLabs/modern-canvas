@@ -5,20 +5,30 @@ const experiences = [
   {
     title: "Operador Informático",
     company: "Biomedica Ingenieria",
-    period: "2025 - presente",
-    description: "Responsable de monitorear, gestionar, controlar, realizar integraciones, dar soporte y mantenimiento a dispositivos integrados en sistema BMS en área de Control Centralizado.",
+    period: "2025 - actualidad",
+    description:
+      "Responsable de monitorear, gestionar, controlar, realizar integraciones, dar soporte y mantenimiento a dispositivos integrados en sistema BMS en área de Control Centralizado.",
   },
-  { 
+  {
     title: "Operador Informático",
     company: "ISAR",
     period: "2021 - 2025",
-    description: "Control y gestión de operaciones en maquinarias de distintas áreas. Programación e integracion de canales horarios, alarmas, variables y constantes de funcionamiento en software EBO Schneider. Soporte y mantenimiento de sistema de video vigilancia.",
+    description:
+      "Control y gestión de operaciones en maquinarias de distintas áreas. Programación e integracion de canales horarios, alarmas, variables y constantes de funcionamiento en software EBO Schneider. Soporte y mantenimiento de sistema de video vigilancia.",
   },
   {
     title: "Tecnico en Automatización",
     company: "OHLA",
-    period: "2018 - 2021",
-    description: "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider.",
+    period: "2021",
+    description:
+      "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider.",
+  },
+  {
+    title: "Tecnico Eléctrico y en Automatización",
+    company: "BAS Ingenieros",
+    period: "2018 - 2020",
+    description:
+      "Responsable de la instalación de canalizados(PVC, EMT, galvanizado) y montaje de tableros de corrientes débiles y automatización, incluyendo programación de PLC, integración de sensores de flujo, presión y estado, cableado estructurado, redes e interfaz BACnet, y diseño UI/ UX, desarrollando además variables y scripts de funcionamiento para maquinarias basados en código adaptado por Schneider.",
   },
 ];
 
@@ -65,15 +75,27 @@ export function ExperienceSection() {
                 <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary glow transform -translate-x-1/2" />
 
                 {/* Content */}
-                <div className={`flex-1 ${index % 2 === 0 ? "md:text-right md:pr-12" : "md:pl-12"} pl-8 md:pl-0`}>
+                <div
+                  className={`flex-1 ${index % 2 === 0 ? "md:text-right md:pr-12" : "md:pl-12"} pl-8 md:pl-0`}
+                >
                   <div className="glass-card p-6 rounded-2xl hover-glow transition-all duration-300">
-                    <div className={`flex items-center gap-2 mb-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+                    <div
+                      className={`flex items-center gap-2 mb-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}
+                    >
                       <Calendar className="w-4 h-4 text-primary" />
-                      <span className="text-sm text-primary font-medium">{exp.period}</span>
+                      <span className="text-sm text-primary font-medium">
+                        {exp.period}
+                      </span>
                     </div>
-                    <h3 className="text-xl font-display font-bold mb-1">{exp.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-4">{exp.company}</p>
-                    <p className="text-muted-foreground leading-relaxed">{exp.description}</p>
+                    <h3 className="text-xl font-display font-bold mb-1">
+                      {exp.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4">
+                      {exp.company}
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {exp.description}
+                    </p>
                   </div>
                 </div>
 
