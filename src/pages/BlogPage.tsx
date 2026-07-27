@@ -5,8 +5,12 @@ import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { getAllPosts, Post } from "@/lib/posts";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/lib/translations";
 
 const BlogPage = () => {
+  const { language } = useLanguage();
+  const t = useTranslation(language);
   const [blogPosts, setBlogPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +24,7 @@ const BlogPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen gradient-bg">
-        <Navbar onContactClick={() => {}} />
+        <Navbar onContactClick={() => { }} />
         <main className="pt-24 pb-16 px-6 lg:px-12">
           <div className="max-w-7xl mx-auto text-center">
             <div className="animate-pulse">
@@ -35,8 +39,8 @@ const BlogPage = () => {
   }
   return (
     <div className="min-h-screen gradient-bg">
-      <Navbar onContactClick={() => {}} />
-      
+      <Navbar onContactClick={() => { }} />
+
       <main className="pt-24 pb-16 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -46,11 +50,10 @@ const BlogPage = () => {
             className="text-left mb-16"
           >
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
-              <span className="gradient-text">Blog</span>
+              <span className="gradient-text">{t.blog.title}</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-              Artículos sobre desarrollo web, tecnología y mejores prácticas. 
-              Compartiendo conocimiento y experiencias del mundo del desarrollo software.
+              {t.blog.description}
             </p>
           </motion.div>
 
@@ -64,7 +67,7 @@ const BlogPage = () => {
                 transition={{ delay: index * 0.1 }}
                 className="group"
               >
-                <Link 
+                <Link
                   to={`/blog/${post.slug}`}
                   className="block h-full"
                 >
@@ -96,7 +99,7 @@ const BlogPage = () => {
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          <span>{new Date(post.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                          <span>{new Date(post.date).toLocaleDateString(language === 'es' ? 'es-ES' : 'en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
@@ -119,7 +122,7 @@ const BlogPage = () => {
             className="text-center mt-12"
           >
             <button className="glass-card px-8 py-3 rounded-full text-foreground hover-glow transition-all duration-300 font-medium hover:scale-105">
-              Cargar más artículos
+              {t.blog.loadMore}
             </button>
           </motion.div>
         </div>

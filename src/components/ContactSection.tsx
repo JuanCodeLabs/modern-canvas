@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, X, Download, FileText, ExternalLink, Phone, MapPin } from "lucide-react";
+import { Mail, X, ExternalLink, FolderOpen, Phone, MapPin } from "lucide-react";
 import { useSocialLinks } from "@/contexts/SocialLinksContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/lib/translations";
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-// Replace with your actual CV file path or URL
-const CV_PDF_URL = '/cv.pdf';
+const GOOGLE_DRIVE_LINK = 'https://drive.google.com/drive/folders/1LKKdVQld8hvkiFXmvBZEt3JeCp6T97px?usp=sharing';
 const EMAIL_ADDRESS = 'jdiazpalma1@gmail.com';
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const { linkedin , github } = useSocialLinks();
+  const { linkedin, github } = useSocialLinks();
+  const { language } = useLanguage();
+  const t = useTranslation(language);
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -21,7 +24,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     } else {
       document.body.style.overflow = 'unset';
     }
-    
+
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -31,8 +34,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     window.location.href = `mailto:${EMAIL_ADDRESS}?subject=Contacto%20desde%20el%20portfolio`;
   };
 
-  const handleDownloadCV = () => {
-    window.open('/CV_Juan_Diaz.pdf', '_blank');
+  const handleOpenGoogleDrive = () => {
+    window.open(GOOGLE_DRIVE_LINK, '_blank');
   };
 
   return (
@@ -44,8 +47,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           exit={{ opacity: 0 }}
           onClick={onClose}
           className="fixed inset-0 z-50 flex items-center justify-center p-6 overflow-auto"
-          style={{ 
-            backdropFilter: "blur(20px)", 
+          style={{
+            backdropFilter: "blur(20px)",
             backgroundColor: "hsl(var(--background) / 0.8)",
             WebkitOverflowScrolling: 'touch'
           }}
@@ -64,8 +67,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <Mail className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-2xl md:text-3xl">Contáctame</h3>
-                    <p className="text-muted-foreground">Estoy disponible para trabajar</p>
+                    <h3 className="font-display font-bold text-2xl md:text-3xl">{t.contact.modalTitle}</h3>
+                    <p className="text-muted-foreground">{t.contact.modalSubtitle}</p>
                   </div>
                 </div>
                 <button
@@ -78,19 +81,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Download CV Card */}
+                {/* Google Drive CV Card */}
                 <button
-                  onClick={handleDownloadCV}
+                  onClick={handleOpenGoogleDrive}
                   className="group p-6 rounded-2xl glass-card border border-border/20 hover:border-primary/30 transition-all duration-300 hover-glow text-left"
                 >
                   <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4 group-hover:scale-110 transition-transform">
-                    <Download className="w-6 h-6 text-primary" />
+                    <FolderOpen className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-medium text-lg mb-2">Descargar CV</h4>
-                  <p className="text-muted-foreground text-sm">Obtén mi currículum en formato PDF</p>
+                  <h4 className="font-medium text-lg mb-2">{t.contact.viewCV}</h4>
+                  <p className="text-muted-foreground text-sm">{t.contact.viewCVDesc}</p>
                   <div className="mt-4 flex items-center text-primary text-sm font-medium">
-                    <FileText className="w-4 h-4 mr-2" />
-                    CV_Juan_Diaz.pdf
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Google Drive
                   </div>
                 </button>
 
@@ -102,8 +105,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4 group-hover:scale-110 transition-transform">
                     <Mail className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-medium text-lg mb-2">Enviar correo</h4>
-                  <p className="text-muted-foreground text-sm">Contáctame directamente por email</p>
+                  <h4 className="font-medium text-lg mb-2">{t.contact.sendEmail}</h4>
+                  <p className="text-muted-foreground text-sm">{t.contact.sendEmailDesc}</p>
                   <div className="mt-4 flex items-center text-primary text-sm font-medium">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     {EMAIL_ADDRESS}
@@ -113,7 +116,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
               <div className="mt-8 pt-6 border-t border-border/20">
                 <p className="text-muted-foreground text-sm text-center">
-                  O contáctame a través de mis redes sociales
+                  {t.contact.social}
                 </p>
                 <div className="flex justify-center gap-4 mt-4">
                   <a
@@ -170,6 +173,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
 export function ContactSection() {
   const { email } = useSocialLinks();
+  const { language } = useLanguage();
+  const t = useTranslation(language);
   return (
     <section id="contacto" className="py-20 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -180,11 +185,10 @@ export function ContactSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            ¿Tienes un proyecto en mente?
+            {t.contact.sectionTitle}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Estoy disponible para nuevos proyectos y oportunidades. 
-            No dudes en contactarme.
+            {t.contact.sectionDesc}
           </p>
         </motion.div>
 
@@ -198,10 +202,10 @@ export function ContactSection() {
             className="glass-card p-6 rounded-2xl text-center hover-glow transition-all duration-300 hover:scale-105"
           >
             <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
-            <h4 className="font-display font-bold mb-2">Email</h4>
+            <h4 className="font-display font-bold mb-2">{t.contact.email}</h4>
             <p className="text-muted-foreground text-sm">jdiazpalma1@gmail.com</p>
           </motion.a>
-{/* 
+          {/* 
           <motion.a
             href="tel:+56912345678"
             initial={{ opacity: 0, y: 20 }}
@@ -223,8 +227,8 @@ export function ContactSection() {
             className="glass-card p-6 rounded-2xl text-center hover-glow transition-all duration-300"
           >
             <MapPin className="w-8 h-8 text-primary mx-auto mb-4" />
-            <h4 className="font-display font-bold mb-2">Ubicación</h4>
-            <p className="text-muted-foreground text-sm">Valparaíso, Chile</p>
+            <h4 className="font-display font-bold mb-2">{t.contact.location}</h4>
+            <p className="text-muted-foreground text-sm">{t.contact.locationValue}</p>
           </motion.div>
         </div>
       </div>

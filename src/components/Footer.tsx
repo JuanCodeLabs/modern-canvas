@@ -1,13 +1,17 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useSocialLinks } from '@/contexts/SocialLinksContext';
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/lib/translations";
 
 export function Footer() {
   const { github, linkedin, email } = useSocialLinks();
+  const { language } = useLanguage();
+  const t = useTranslation(language);
   return (
     <footer className="py-8 px-6 lg:px-12 border-t border-border/50">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-muted-foreground text-sm">
-          © 2026 Juan Díaz. Casi todos los derechos reservados.
+          {t.footer.copyright}
         </p>
 
         <div className="flex items-center gap-4">

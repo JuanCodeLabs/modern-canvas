@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/lib/translations";
 
-const roles = ["Diseñador Web", "Automatizador", "Analista de Datos", "Programador"];
+const rolesES = ["Diseñador Web", "Automatizador", "Analista de Datos", "Programador"];
+const rolesEN = ["Web Designer", "Automator", "Data Analyst", "Programmer"];
 
 export function HeroSection() {
+  const { language } = useLanguage();
+  const t = useTranslation(language);
+  const roles = language === "es" ? rolesES : rolesEN;
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -53,9 +59,9 @@ export function HeroSection() {
           transition={{ delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground mb-4 font-display"
         >
-          Soy
+          {t.hero.iAm}
         </motion.p>
-        
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,10 +69,9 @@ export function HeroSection() {
           className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 min-h-[1.2em]"
         >
           <span className="gradient-text">{displayText}</span>
-          <span 
-            className={`inline-block w-[3px] md:w-[4px] h-[0.9em] bg-primary ml-1 align-middle transition-opacity duration-100 ${
-              showCursor ? "opacity-100" : "opacity-0"
-            }`}
+          <span
+            className={`inline-block w-[3px] md:w-[4px] h-[0.9em] bg-primary ml-1 align-middle transition-opacity duration-100 ${showCursor ? "opacity-100" : "opacity-0"
+              }`}
           />
         </motion.h1>
 
@@ -77,10 +82,9 @@ export function HeroSection() {
           className="max-w-2xl mx-auto mb-6"
         >
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Mi nombre es <span className="text-foreground font-semibold">Juan Díaz</span>,{" "}
-            <span className="text-foreground font-medium">Programador y Analista de Datos</span>.
-            Soy desarrollador de aplicaciones atractivas y enfocadas en un diseño único y enfocado en{" "}
-            <span className="text-foreground font-semibold">cumplir las necesidades del cliente</span>.
+            {t.hero.intro} <span className="text-foreground font-semibold">{t.hero.name}</span>,{" "}
+            <span className="text-foreground font-medium">{t.hero.role}</span>.
+            {t.hero.description} <span className="text-foreground font-semibold">{t.hero.focus}</span>.
           </p>
         </motion.div>
 
@@ -94,13 +98,13 @@ export function HeroSection() {
             href="#trabajos"
             className="glass-card px-8 py-3 rounded-full font-medium hover-glow transition-all duration-300 hover:bg-primary/20"
           >
-            Trabajos
+            {t.hero.works}
           </a>
           <a
             href="#experiencia"
             className="glass-card px-8 py-3 rounded-full font-medium hover-glow transition-all duration-300 hover:bg-primary/20"
           >
-            Experiencia
+            {t.hero.experience}
           </a>
         </motion.div>
 

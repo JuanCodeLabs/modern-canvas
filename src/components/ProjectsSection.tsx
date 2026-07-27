@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, X, Briefcase } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/lib/translations";
 
 interface Project {
   id: number;
@@ -13,38 +15,40 @@ interface Project {
   githubUrl?: string;
 }
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Noe Botes",
-    description: "Plataforma de navegación y contacto para empresa de reparacion de embarcaciones.",
-    fullDescription: "Sistema completo de gestión para servicios de reparación de embarcaciones.",
-    image: "https://c.pxhere.com/photos/f5/6d/zachranari_inflatable_boat_ocean_swanage_bay-710973.jpg!d",
-    technologies: ["React", "Tailwind"],
-    liveUrl: "https://noebotes.vercel.app/",
-  },
-  {
-    id: 2,
-    title: "Tracelite",
-    description: "LandingPage y Panel de control para visualización de equipos y generación de reportes.",
-    fullDescription: "Dashboard interactivo con gráficos en tiempo real, KPIs personalizables y reportes automatizados. Integración con múltiples fuentes de datos.",
-    image: "tracelite.png",
-    technologies: ["TypeScript", "Supabase", "Tailwind", "Chart.js", "React", "Vite", "Stripe"],
-    liveUrl: "https://tracelite.org/",
-  },
-  {
-    id: 3,
-    title: "LinuxPro E-Commerce",
-    description: "Tienda online con gestión de inventario.",
-    fullDescription: "Plataforma completa de comercio electrónico con carrito de compras, pasarela de pagos, gestión de inventario y sistema de envíos integrado.",
-    image: "linuxpro.png",
-    technologies: ["React", "Node.js", "Stripe", "Tailwind", "Prisma", "PostgreSQL", "Supabase"],
-    liveUrl: "https://linuxpro.vercel.app/",
-  },
-];
-
 export function ProjectsSection() {
+  const { language } = useLanguage();
+  const t = useTranslation(language);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const projects: Project[] = [
+    {
+      id: 1,
+      title: t.projects.project1.title,
+      description: t.projects.project1.description,
+      fullDescription: t.projects.project1.fullDescription,
+      image: "https://c.pxhere.com/photos/f5/6d/zachranari_inflatable_boat_ocean_swanage_bay-710973.jpg!d",
+      technologies: ["React", "Tailwind"],
+      liveUrl: "https://noebotes.vercel.app/",
+    },
+    {
+      id: 2,
+      title: t.projects.project2.title,
+      description: t.projects.project2.description,
+      fullDescription: t.projects.project2.fullDescription,
+      image: "tracelite.png",
+      technologies: ["TypeScript", "Supabase", "Tailwind", "Chart.js", "React", "Vite", "Stripe"],
+      liveUrl: "https://tracelite.org/",
+    },
+    {
+      id: 3,
+      title: t.projects.project3.title,
+      description: t.projects.project3.description,
+      fullDescription: t.projects.project3.fullDescription,
+      image: "linuxpro.png",
+      technologies: ["React", "Node.js", "Stripe", "Tailwind", "Prisma", "PostgreSQL", "Supabase"],
+      liveUrl: "https://linuxpro.vercel.app/",
+    },
+  ];
 
   return (
     <section id="trabajos" className="py-20 px-6 lg:px-12">
@@ -59,16 +63,15 @@ export function ProjectsSection() {
             <Briefcase className="w-8 h-8 text-primary" />
             <div>
               <h2 className="text-3xl md:text-4xl font-display font-bold">
-                Trabajos
+                {t.projects.title}
               </h2>
               <h2 className="text-3xl md:text-4xl font-display font-bold gradient-text">
-                realizados
+                {t.projects.subtitle}
               </h2>
             </div>
           </div>
           <p className="text-muted-foreground max-w-xl">
-            Los trabajos que he realizado durante este tiempo son los siguientes.
-            Presiona en cualquiera para más información.
+            {t.projects.description}
           </p>
         </motion.div>
 
@@ -175,7 +178,7 @@ export function ProjectsSection() {
                       className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      Ver pagina
+                      {t.projects.viewPage}
                     </a>
                   )}
                   {selectedProject.githubUrl && (
@@ -186,7 +189,7 @@ export function ProjectsSection() {
                       className="flex items-center gap-2 px-6 py-3 rounded-full glass-card font-medium hover-glow transition-all"
                     >
                       <Github className="w-4 h-4" />
-                      Código
+                      {t.projects.code}
                     </a>
                   )}
                 </div>

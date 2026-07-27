@@ -1,38 +1,19 @@
 import { motion } from "framer-motion";
 import { Building2, Calendar } from "lucide-react";
-
-const experiences = [
-  {
-    title: "Operador Informático",
-    company: "Biomedica Ingenieria",
-    period: "2025 - actualidad",
-    description:
-      "Responsable de monitorear, gestionar, controlar, realizar integraciones, dar soporte y mantenimiento a dispositivos integrados en sistema BMS en área de Control Centralizado.",
-  },
-  {
-    title: "Operador Informático",
-    company: "ISAR",
-    period: "2021 - 2025",
-    description:
-      "Control y gestión de operaciones en maquinarias de distintas áreas. Programación e integracion de canales horarios, alarmas, variables y constantes de funcionamiento en software EBO Schneider. Soporte y mantenimiento de sistema de video vigilancia.",
-  },
-  {
-    title: "Tecnico en Automatización",
-    company: "OHLA",
-    period: "2021",
-    description:
-      "Responsable de realizar integración, programación de funcionamiento y diseño UX/UI de distintos dispositivos en corrientes débiles integradas en plataforma workstation Building Operator de Schneider.",
-  },
-  {
-    title: "Tecnico Eléctrico y en Automatización",
-    company: "BAS Ingenieros",
-    period: "2018 - 2020",
-    description:
-      "Responsable de la instalación de canalizados(PVC, EMT, galvanizado) y montaje de tableros de corrientes débiles y automatización, incluyendo programación de PLC, integración de sensores de flujo, presión y estado, cableado estructurado, redes e interfaz BACnet, y diseño UI/ UX, desarrollando además variables y scripts de funcionamiento para maquinarias basados en código adaptado por Schneider.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/lib/translations";
 
 export function ExperienceSection() {
+  const { language } = useLanguage();
+  const t = useTranslation(language);
+
+  const experiences = [
+    t.experience.exp1,
+    t.experience.exp2,
+    t.experience.exp3,
+    t.experience.exp4,
+  ];
+
   return (
     <section id="experiencia" className="py-20 px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -46,10 +27,10 @@ export function ExperienceSection() {
             <Building2 className="w-8 h-8 text-primary" />
             <div>
               <h2 className="text-3xl md:text-4xl font-display font-bold">
-                Experiencia
+                {t.experience.title}
               </h2>
               <h2 className="text-3xl md:text-4xl font-display font-bold gradient-text">
-                profesional
+                {t.experience.subtitle}
               </h2>
             </div>
           </div>
@@ -67,9 +48,8 @@ export function ExperienceSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`relative flex flex-col md:flex-row gap-8 ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
-                }`}
+                className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? "md:flex-row-reverse" : ""
+                  }`}
               >
                 {/* Timeline dot */}
                 <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary glow transform -translate-x-1/2" />

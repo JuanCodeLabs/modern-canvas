@@ -2,27 +2,32 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, MoreHorizontal, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageToggle } from "./LanguageToggle";
 import { useSocialLinks } from "@/contexts/SocialLinksContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/lib/translations";
 import { Link, useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   onContactClick: () => void;
 }
 
-const menuItems = [
-  { name: "Inicio", href: "#inicio" },
-  { name: "Trabajos", href: "#trabajos" },
-  { name: "Experiencia", href: "#experiencia" },
-  { name: "Conocimientos", href: "#conocimientos" },
-  { name: "Blog", href: "/blog" },
-  { name: "Sobre mí", href: "#sobre-mi" },
-  { name: "Contacto", href: "#contacto" },
-];
 
 export function Navbar({ onContactClick }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { linkedin, github } = useSocialLinks();
+  const { language } = useLanguage();
+  const t = useTranslation(language);
   const navigate = useNavigate();
+
+  const menuItems = [
+    { name: t.navbar.home, href: "#inicio" },
+    { name: t.navbar.works, href: "#trabajos" },
+    { name: t.navbar.experience, href: "#experiencia" },
+    { name: t.navbar.blog, href: "/blog" },
+    { name: t.navbar.about, href: "#sobre-mi" },
+    { name: t.navbar.contact, href: "#contacto" },
+  ];
 
   // Handle ESC key press to close menu
   useEffect(() => {
@@ -39,7 +44,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
     } else {
       document.body.style.overflow = 'unset';
     }
-    
+
     // Cleanup
     return () => {
       document.body.style.overflow = 'unset';
@@ -49,13 +54,13 @@ export function Navbar({ onContactClick }: NavbarProps) {
 
   const scrollToSection = (href: string) => {
     setIsMenuOpen(false);
-    
+
     // Si es una ruta externa (como /blog), usar navigate de React Router
     if (href.startsWith('/')) {
       navigate(href);
       return;
     }
-    
+
     // Si es un ancla, primero ir a la página principal luego hacer scroll
     if (href.startsWith('#')) {
       // Si no estamos en la página principal, navegar a home primero
@@ -93,7 +98,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
           >
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Disponible para trabajar
+              {t.navbar.available}
             </span>
           </motion.button>
 
@@ -103,13 +108,13 @@ export function Navbar({ onContactClick }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             className="hidden md:flex items-center gap-1 glass-card rounded-full px-2 py-1"
           >
-            {["Inicio", "Trabajos", "Experiencia", "Blog", "Contacto"].map((item) => (
+            {[t.navbar.home, t.navbar.works, t.navbar.experience, t.navbar.blog, t.navbar.contact].map((item) => (
               <button
                 key={item}
                 onClick={() => {
-                  if (item === "Blog") {
+                  if (item === t.navbar.blog) {
                     navigate("/blog");
-                  } else if (item === "Inicio") {
+                  } else if (item === t.navbar.home) {
                     navigate('/');
                   } else {
                     // Para las secciones, ir a home primero si no estamos allí
@@ -143,6 +148,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
             className="flex items-center gap-3"
           >
             <ThemeToggle />
+            <LanguageToggle />
             <a
               href={github}
               target="_blank"
@@ -180,7 +186,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
             className="fixed inset-0 z-50 bg-background/95"
             style={{ backdropFilter: "blur(10px)" }}
           >
-            <div 
+            <div
               className="h-full flex"
               onClick={(e) => e.stopPropagation()}
             >
@@ -210,6 +216,7 @@ export function Navbar({ onContactClick }: NavbarProps) {
                   transition={{ delay: 0.3 }}
                   onClick={() => setIsMenuOpen(false)}
                   className="p-3 rounded-full glass-card hover-glow"
+                  aria-label={t.navbar.close}
                 >
                   <X className="w-6 h-6" />
                 </motion.button>
